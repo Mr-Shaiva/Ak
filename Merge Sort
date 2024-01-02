@@ -1,0 +1,69 @@
+void merge(vector<int> &arr, int s, int e) {
+  int mid = s + (e - s) / 2;
+
+  // length of the new arrays
+  int arr1len = mid - s + 1;
+  int arr2len = e - mid;
+
+  // dynamic creation of new arrays
+  int *firstArray = new int[arr1len];
+  int *secondArray = new int[arr2len];
+
+  // copying the values of main array to newly created sub arrays
+
+  int mainArrayIndex = s;
+
+  for (int i = 0; i < arr1len; i++) {
+    firstArray[i] = arr[mainArrayIndex++];
+  }
+
+  mainArrayIndex = mid + 1;
+
+  for (int i = 0; i < arr2len; i++) {
+    secondArray[i] = arr[mainArrayIndex++];
+  }
+
+  // after creation of 2 subarrays, merge the two sorted array
+
+  int index1 = 0;
+  int index2 = 0;
+
+  mainArrayIndex = s;
+
+  while (index1 < arr1len && index2 < arr2len) {
+    if (firstArray[index1] < secondArray[index2]) {
+      arr[mainArrayIndex++] = firstArray[index1++];
+    } else {
+      arr[mainArrayIndex++] = secondArray[index2++];
+    }
+  }
+
+  while (index1 < arr1len) {
+
+    arr[mainArrayIndex++] = firstArray[index1++];
+  }
+
+  while (index2 < arr2len) {
+
+    arr[mainArrayIndex++] = secondArray[index2++];
+  }
+}
+
+void solve(vector<int> &arr, int s, int e) {
+  // base case
+  if (s >= e)
+    return;
+
+  int mid = s + (e - s) / 2;
+
+  // sort the left part
+  solve(arr, s, mid);
+
+  // sort the right part
+  solve(arr, mid + 1, e);
+
+  // merge left and right arrays
+  merge(arr, s, e);
+}
+
+void mergeSort(vector<int> &arr, int n) { solve(arr, 0, n - 1); }
