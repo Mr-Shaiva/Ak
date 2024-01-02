@@ -47,6 +47,9 @@ void merge(vector<int> &arr, int s, int e) {
 
     arr[mainArrayIndex++] = secondArray[index2++];
   }
+
+  delete[] firstArray;
+  delete[] secondArray;
 }
 
 void solve(vector<int> &arr, int s, int e) {
