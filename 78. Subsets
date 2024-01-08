@@ -1,0 +1,30 @@
+class Solution {
+    void solve(vector<int> nums, vector<int> temporaryOutput, int index, vector<vector<int>>& finalOutput){
+        //base case
+        if(index >= nums.size()){
+            finalOutput.push_back(temporaryOutput);
+            return;
+        }
+
+        //exclude
+        solve(nums,temporaryOutput,index+1,finalOutput);
+
+        //include
+        int element = nums[index];
+        temporaryOutput.push_back(element);
+        solve(nums,temporaryOutput,index+1,finalOutput);
+
+    }
+
+
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+
+        vector<vector<int>> finalOutput;
+        vector<int> temporaryOutput;
+        int index=0;
+
+        solve(nums,temporaryOutput,index,finalOutput);
+        return finalOutput;
+    }
+};
