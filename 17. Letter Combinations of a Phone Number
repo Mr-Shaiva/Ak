@@ -1,0 +1,37 @@
+class Solution {
+    void solve(string digits,string tempAns,int index,vector<string>& finalAns,string mapping[]){
+
+        //base case
+        if(index >= digits.length()){
+            finalAns.push_back(tempAns);
+            return;
+        }
+
+        int number = digits[index] - '0';
+        string value = mapping[number];
+
+        for(int i=0; i<value.length(); i++){
+            tempAns.push_back(value[i]);
+            solve(digits,tempAns,index+1,finalAns,mapping);
+            tempAns.pop_back();
+        }
+
+    }
+
+public:
+    vector<string> letterCombinations(string digits) {
+
+    vector<string> finalAns;
+    if(digits.length() == 0){
+        return finalAns;
+    }
+    
+    string tempAns;
+    int index = 0;
+    string mapping[10] = {"", "", "abc", "def", " ghi", "jkl", "mno", "pqrs", "tuv" , "wxyz"};
+    
+    solve(digits,tempAns,index,finalAns,mapping);
+    return finalAns;
+        
+    }
+};
