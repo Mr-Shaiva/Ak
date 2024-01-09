@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+
+void solve(string str, string tempOutputString, int index, vector<string> &finalOutputString) {
+
+  // base case
+  if (index >= str.length()) {
+	  if(tempOutputString.length()>0){
+    	finalOutputString.push_back(tempOutputString);
+	  }
+    return;
+  }
+
+  // exclude case
+  solve(str, tempOutputString, index + 1, finalOutputString);
+
+  // include case
+  char element = str[index];
+  tempOutputString.push_back(element);
+  solve(str, tempOutputString, index + 1, finalOutputString);
+}
+
+vector<string> subsequences(string str) {
+
+  vector<string> finalOutputString;
+  string tempOutputString = "";
+  int index = 0;
+
+  solve(str, tempOutputString, index, finalOutputString);
+  return finalOutputString;
+}
