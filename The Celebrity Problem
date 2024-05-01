@@ -62,6 +62,7 @@ class Solution
         if(colCheck == true && rowCheck == true){
             return candidate;
         }
+        return -1;
         
     }
 };
