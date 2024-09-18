@@ -1,0 +1,16 @@
+public class Solution {
+    public int solve(String A) {
+        int countA = 0, countP = 0, countM = 0;
+
+        for (char c: A.toCharArray()){
+            if(c == 'a')
+                countA++;
+            else if(c == 'p')
+                countP++;
+            else
+                countM++;
+        }
+
+        return (countM == countA + countP)? 1:0;
+    }
+}
