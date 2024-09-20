@@ -1,0 +1,12 @@
+public class Solution {
+    public int solve(int A, int B, int C) {
+        int day = 0;
+        boolean flag = true;
+
+        while(C>0){
+            C = C+B-A
+            day++;
+        }
+        return day;
+    }
+}
