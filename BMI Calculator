@@ -1,0 +1,39 @@
+import java.lang.*;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        // Input height in centimeters
+        int heightInCm = sc.nextInt();
+        
+        // Input weight in kilograms
+        int weightInKg = sc.nextInt();
+        
+        // Convert height from centimeters to meters
+        double heightInMeters = heightInCm / 100.0;
+        
+        // Calculate BMI
+        double bmi = weightInKg / (heightInMeters * heightInMeters);
+        
+        // Round BMI to one decimal place
+        bmi = Math.round(bmi * 10.0) / 10.0;
+        
+        // Determine classification based on BMI
+        String classification;
+        if (bmi < 18.5) {
+            classification = "Underweight";
+        } else if (bmi <= 24.9) {
+            classification = "Normal";
+        } else if (bmi <= 29.9) {
+            classification = "Overweight";
+        } else {
+            classification = "Obese";
+        }
+        
+        // Output the classification and BMI value
+        System.out.println(classification);
+        System.out.println(bmi);
+    }
+}
