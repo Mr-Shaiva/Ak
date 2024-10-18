@@ -1,0 +1,34 @@
+class Solution(object):
+    def findXSum(self, nums, k, x):
+        """
+        :type nums: List[int]
+        :type k: int
+        :type x: int
+        :rtype: List[int]
+        """
+        n = len(nums)
+        ans = []
+
+        for i in range(n-k+1):
+            substring = nums[i:i+k]
+
+            freq = Counter(substring)
+
+            sorted_elements = sorted(freq.items(), key=lambda item: (-item[1], -item[0]))
+
+            unique_ele = 0
+            top_x_elem = []
+
+            for value,count in sorted_elements:
+                if(unique_ele <x):
+                    for _ in range(count):
+                        top_x_elem.append(value)
+                    unique_ele += 1
+                else:
+                    break
+
+            x_sum = sum(top_x_elem)
+
+            ans.append(x_sum)
+
+        return ans           
