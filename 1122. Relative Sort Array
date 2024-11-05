@@ -1,0 +1,51 @@
+from collections import Counter
+
+def relativeSortArray(arr1, arr2):
+    # Step 1: Count occurrences of each element in arr1
+    count = Counter(arr1)
+    result = []
+    
+    # Step 2: Add elements in the order defined by arr2
+    for num in arr2:
+        if num in count:
+            result.extend([num] * count[num])  # Add num, count[num] times
+            del count[num]  # Remove processed elements
+    
+    # Step 3: Add remaining elements sorted in ascending order
+    remaining_elements = sorted(count.elements())  # count.elements() gives items as per their counts
+    result.extend(remaining_elements)
+    
+    return result
+
+##################################################################################################
+
+#include <vector>
+#include <unordered_map>
+#include <algorithm>
+
+std::vector<int> relativeSortArray(std::vector<int>& arr1, std::vector<int>& arr2) {
+    // Step 1: Count occurrences of each element in arr1
+    std::unordered_map<int, int> count;
+    for (int num : arr1) {
+        count[num]++;
+    }
+
+    // Step 2: Place elements in arr2's order
+    std::vector<int> result;
+    for (int num : arr2) {
+        if (count.find(num) != count.end()) {
+            result.insert(result.end(), count[num], num);  // Insert 'num', count[num] times
+            count.erase(num);  // Remove processed elements from count map
+        }
+    }
+
+    // Step 3: Place remaining elements sorted in ascending order
+    std::vector<int> remaining_elements;
+    for (const auto& [num, freq] : count) {
+        remaining_elements.insert(remaining_elements.end(), freq, num);  // Insert 'num', freq times
+    }
+    std::sort(remaining_elements.begin(), remaining_elements.end());  // Sort remaining elements
+    result.insert(result.end(), remaining_elements.begin(), remaining_elements.end());
+
+    return result;
+}
