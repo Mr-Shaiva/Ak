@@ -1,0 +1,76 @@
+
+class Solution {
+public:
+    vector<string> sortPeople(vector<string>& names, vector<int>& heights) {
+        vector<pair<int,string>> people;
+        int n=heights.size();
+
+        for(int i=0; i<n; i++){
+            people.push_back({heights[i],names[i]});
+        }
+
+        sort(people.begin(),people.end(), [](const auto& a, const auto& b)
+        {
+            return a.first > b.first;
+        });
+
+        vector<string> sortedNames;
+
+        for(const auto& person : people)
+            sortedNames.push_back(person.second);
+
+        return sortedNames;        
+    }
+};
+
+############################################################################################
+
+#include <vector>         // Includes the vector library to use the vector container.
+#include <string>         // Includes the string library to work with string data type.
+#include <algorithm>      // Includes the algorithm library to use the sort function.
+
+std::vector<std::string> sortPeople(std::vector<std::string>& names, std::vector<int>& heights) {
+    int n = names.size(); // Stores the number of elements (people) in the vector 'names'.
+
+    // Step 1: Pair each name with its corresponding height
+    std::vector<std::pair<int, std::string>> people; // Creates a vector of pairs (height, name).
+
+    for (int i = 0; i < n; ++i) {
+        people.push_back({heights[i], names[i]});
+        // `push_back` adds a new pair to 'people', where each pair consists of a height and the corresponding name.
+    }
+
+    // Step 2: Sort the people by height in descending order
+    std::sort(people.begin(), people.end(), [](const auto& a, const auto& b) {
+        return a.first > b.first; 
+        // Custom comparison function to sort pairs. `a.first` is the height of the first person in the comparison,
+        // `b.first` is the height of the second person. `a.first > b.first` means we want descending order.
+    });
+
+    // Step 3: Extract the names in the sorted order
+    std::vector<std::string> sorted_names; // Stores names sorted by descending height.
+
+    for (const auto& person : people) {
+        sorted_names.push_back(person.second);
+        // `push_back` adds the name (`person.second`) to 'sorted_names' after sorting by height.
+    }
+
+    return sorted_names; // Returns the sorted names as the output.
+}
+
+############################################################################################
+
+def sortPeople(names, heights):
+    # Step 1: Combine names and heights into a list of tuples
+    people = list(zip(heights, names))
+    
+    # Step 2: Sort the people by height in descending order
+    people.sort(key=lambda x: x[0], reverse=True)
+    # Explanation:
+    # - `key=lambda x: x[0]` tells Python to sort by the first element of each tuple (which is height in this case).
+    # - `reverse=True` sorts the list in descending order.
+    
+    # Step 3: Extract the sorted names
+    sorted_names = [name for _, name in people]
+    return sorted_names
+
